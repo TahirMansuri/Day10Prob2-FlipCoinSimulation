@@ -18,9 +18,34 @@ do
 	fi
 done
 
-if (( $headCount==21 ))
+#Checking for Tie in Head and Tail
+if (( $headCount > $tailCount ))
 then
 	echo "Head Wins 21 Times!!!";
-else
+elif (( $tailCount > $headCount ))
+then
 	echo "Tail Wins 21 Times!!!";
+else
+	echo "Game Tied!!!";
+	for (( i=0; i<3; i++ ))
+	do
+		flip=$((RANDOM%2));
+		echo $flip;
+		if (( $flip == 0 ))
+		then
+			((tailCount++));
+		else
+			((headCount++));
+		fi
+	done
+
+	echo "Tail Count After Tie = " $tailCount;
+	echo "Head Count After Tie = " $headCount;
+
+	if (( $headCount > $tailCount ))
+	then
+		echo "Head Wins After Tie";
+	else
+		echo "Tail Wins After Tie";
+	fi
 fi
